@@ -7,7 +7,7 @@ import FancyValue from 'components/FancyValue'
 import Split from 'components/Split'
 import SimplePriceChart from 'components/SimplePriceChart'
 
-import useDpiTokenMarketData from 'hooks/useDpiTokenMarketData'
+import useTokenMarketData from 'hooks/useTokenMarketData'
 
 const MarketData: React.FC = () => {
   const {
@@ -15,7 +15,10 @@ const MarketData: React.FC = () => {
     latestMarketCap,
     latestPrice,
     prices,
-  } = useDpiTokenMarketData()
+  } = useTokenMarketData()
+
+  console.log('price is', prices)
+  console.log(prices?.map(([x, y]) => ({ x, y })))
   const priceAtEpochStart = prices?.[0]?.[1] || 1
   const epochPriceChange = (latestPrice || 0) - priceAtEpochStart
   const dpiTokenIcon = {

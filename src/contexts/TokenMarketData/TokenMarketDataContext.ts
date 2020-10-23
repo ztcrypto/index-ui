@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-interface DpiTokenMarketDataValues {
+interface TokenMarketDataValues {
   prices?: number[][]
   marketcaps?: number[][]
   volumes?: number[][]
@@ -9,6 +9,6 @@ interface DpiTokenMarketDataValues {
   latestVolume?: number
 }
 
-const DpiMarketData = createContext<DpiTokenMarketDataValues>({})
+const DpiMarketData = createContext<TokenMarketDataValues>({})
 
 export default DpiMarketData

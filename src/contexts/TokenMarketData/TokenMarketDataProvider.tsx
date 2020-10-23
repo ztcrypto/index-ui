@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import MarketDataContext from './DpiTokenMarketDataContext'
-import { DPI } from 'constants/coingeckoIds'
+import MarketDataContext from './TokenMarketDataContext'
+import * as coingeckoIds from 'constants/coingeckoIds'
 import { fetchHistoricalTokenMarketData } from 'utils/coingeckoApi'
 
 const DpiMarketDataProvider: React.FC = ({ children }) => {
@@ -10,7 +10,7 @@ const DpiMarketDataProvider: React.FC = ({ children }) => {
     const endTime = Date.now() / 1000
     const startTime = endTime - 86400 * 30 // 30 days
 
-    fetchHistoricalTokenMarketData(DPI, startTime, endTime)
+    fetchHistoricalTokenMarketData(coingeckoIds.DPI_ID, startTime, endTime)
       .then((response: any) => {
         setDpiMarketData(response)
       })

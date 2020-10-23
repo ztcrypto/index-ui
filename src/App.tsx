@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ToastContainer, Slide } from 'react-toastify'
 import { ApolloProvider } from '@apollo/client'
 import styled from 'styled-components'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 import MobileMenu from 'components/MobileMenu'
 import TopBar from 'components/TopBar'
@@ -15,7 +15,7 @@ import { ExternalAirdropProvider } from 'contexts/ExternalAirdrop'
 import { FarmingProvider } from 'contexts/Farming'
 import { PricesProvider } from 'contexts/Prices'
 import { WalletProvider } from 'contexts/Wallet'
-import { DpiTokenMarketDataProvider } from 'contexts/DpiTokenMarketData'
+import { TokenMarketDataProvider } from 'contexts/TokenMarketData'
 
 import useLocalStorage from 'hooks/useLocalStorage'
 
@@ -43,7 +43,7 @@ const App: React.FC = () => {
       <Providers>
         <ComingSoon />
       </Providers>
-    );
+    )
   }
 
   return (
@@ -51,7 +51,10 @@ const App: React.FC = () => {
       <Providers>
         <StyledBackgroundDiv>
           <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
-          <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
+          <MobileMenu
+            onDismiss={handleDismissMobileMenu}
+            visible={mobileMenu}
+          />
           <Switch>
             <Route exact path='/'>
               <Home />
@@ -88,9 +91,9 @@ const Providers: React.FC = ({ children }) => {
               <PricesProvider>
                 <BalancesProvider>
                   <FarmingProvider>
-                    <DpiTokenMarketDataProvider>
+                    <TokenMarketDataProvider>
                       {children}
-                    </DpiTokenMarketDataProvider>
+                    </TokenMarketDataProvider>
                   </FarmingProvider>
                 </BalancesProvider>
               </PricesProvider>
@@ -98,10 +101,7 @@ const Providers: React.FC = ({ children }) => {
           </AirdropProvider>
         </ApolloProvider>
       </WalletProvider>
-      <ToastContainer
-        transition={Slide}
-        position="bottom-left"
-      />
+      <ToastContainer transition={Slide} position='bottom-left' />
     </ThemeProvider>
   )
 }
@@ -112,6 +112,5 @@ const StyledBackgroundDiv = styled.div`
   background-size: cover;
   background-position: center top;
 `
-
 
 export default App
