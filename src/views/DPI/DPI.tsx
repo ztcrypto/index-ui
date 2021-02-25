@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Spacer } from 'react-neu'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 import Page from 'components/Page'
 import {
@@ -20,8 +21,10 @@ import useDpiTokenMarketData from 'hooks/useDpiTokenMarketData'
 import useDpiIndexComponents from 'hooks/useDpiIndexComponents'
 import useBalances from 'hooks/useBalances'
 
-import DpiIndexCalculationImage from 'assets/dpi-index-calculation.png'
 import TransakBuySellButton from 'components/TransakBuySellButton'
+import DpiIndexCalculationImage from 'assets/dpi-index-calculation.png'
+
+import useLocalStorage from 'hooks/useLocalStorage'
 
 const DpiProductPage = (props: { title: string }) => {
   useEffect(() => {
@@ -36,6 +39,15 @@ const DpiProductPage = (props: { title: string }) => {
   } = useDpiTokenMarketData()
   const { components } = useDpiIndexComponents()
   const { dpiBalance } = useBalances()
+
+  const [_, setReferral] = useLocalStorage('referral', '')
+
+  const history = useHistory()
+  const params = new URLSearchParams(history.location.search)
+  const value = params.get('referral')
+  useEffect(() => {
+    if (value) setReferral(value)
+  }, [value])
 
   return (
     <Page>
@@ -59,6 +71,9 @@ const DpiProductPage = (props: { title: string }) => {
             latestPrice={latestPrice}
             latestVolume={latestVolume}
             latestMarketCap={latestMarketCap}
+            fees={{
+              streamingFee: '0.95%',
+            }}
           />
           <Description>
             <strong>The DeFi Pulse Index</strong> is a capitalization-weighted
